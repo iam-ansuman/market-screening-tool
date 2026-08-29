@@ -1,16 +1,16 @@
 country,attractiveness_score,risk_score,resilience_score,attractiveness_high,risk_high,classification
 Bangladesh,31.721168801466224,10,61.20576581176013,False,True,Elevated Risk / Low Priority
 Brunei,63.28083906943803,10,53.65151904709981,True,True,Investigate
-Cambodia,44.65679908803588,0,29.291904559440297,True,True,Investigate
+Cambodia,44.65679908803588,0,29.291904559440297,True,False,Priority Market
 China,62.15741812152996,10,53.8563969729131,True,True,Investigate
-India,44.34117196018673,0,73.1848302770957,False,True,Elevated Risk / Low Priority
+India,44.34117196018673,0,73.1848302770957,False,False,Watch
 Indonesia,46.75371234422352,20,80.50056153369644,True,True,Investigate
-Laos,38.23417618615062,0,69.53214910512743,False,True,Elevated Risk / Low Priority
-Malaysia,62.51573012448743,0,66.64525032696316,True,True,Investigate
-Myanmar,11.527947676912616,0,31.545481403527035,False,True,Elevated Risk / Low Priority
+Laos,38.23417618615062,0,69.53214910512743,False,False,Watch
+Malaysia,62.51573012448743,0,66.64525032696316,True,False,Priority Market
+Myanmar,11.527947676912616,0,31.545481403527035,False,False,Watch
 Nepal,16.772501358402003,10,56.22064901661936,False,True,Elevated Risk / Low Priority
-Philippines,39.07066405283623,0,65.32688009317638,False,True,Elevated Risk / Low Priority
-Singapore,82.97004361931205,0,73.37592813314274,True,True,Investigate
-Sri Lanka,22.48823241431021,0,56.16998801395015,False,True,Elevated Risk / Low Priority
-Thailand,46.9243347221046,0,43.95538845810546,True,True,Investigate
-Vietnam,57.14060076797373,0,75.82465858965244,True,True,Investigate
+Philippines,39.07066405283623,0,65.32688009317638,False,False,Watch
+Singapore,82.97004361931205,0,73.37592813314274,True,False,Priority Market
+Sri Lanka,22.48823241431021,0,56.16998801395015,False,False,Watch
+Thailand,46.9243347221046,0,43.95538845810546,True,False,Priority Market
+Vietnam,57.14060076797373,0,75.82465858965244,True,False,Priority Market
