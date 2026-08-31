@@ -1,71 +1,42 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
 
 st.title("Market Screening Overview")
 
-master = pd.read_csv("data/processed/master_scores.csv")
+master = pd.read_csv('data/processed/master_scores.csv')
 
-st.subheader("All Countries Ranking")
-
-sort_by = st.selectbox(
-    "Sort by",
-    [
-        "attractiveness_score",
-        "risk_score",
-        "resilience_score",
-    ],
-)
-
-ranking = (
-    master[
-        [
-            "country",
-            "attractiveness_score",
-            "risk_score",
-            "resilience_score",
-            "classification",
-        ]
-    ]
-    .sort_values(sort_by, ascending=False)
-    .reset_index(drop=True)
-)
-
-st.dataframe(ranking, use_container_width=True)
+st.subheader("All Countries Ranked by Attractiveness")
+sort_by = st.selectbox("Sort by", ["attractiveness_score", "risk_score", "resilience_score"])
+st.dataframe(master[['country', 'attractiveness_score', 'risk_score', 'resilience_score', 'classification']].sort_values(sort_by, ascending=False))
 
 st.subheader("Attractiveness vs Risk Matrix")
 
-fig, ax = plt.subplots(figsize=(10, 6))
-
-colors_map = {
-    "Priority Market": "green",
-    "Investigate": "orange",
-    "Watch": "blue",
-    "Elevated Risk / Low Priority": "red",
+color_map = {
+    "Priority Market": "#2ecc71",
+    "Investigate": "#f39c12",
+    "Watch": "#3498db",
+    "Elevated Risk / Low Priority": "#e74c3c"
 }
 
-for label, group in master.groupby("classification"):
-    ax.scatter(
-        group["attractiveness_score"],
-        group["risk_score"],
-        label=label,
-        color=colors_map.get(label, "gray"),
-        s=70,
-        alpha=0.8,
-    )
+fig = px.scatter(
+    master,
+    x="attractiveness_score",
+    y="risk_score",
+    color="classification",
+    color_discrete_map=color_map,
+    text="country",
+    size_max=15,
+    hover_data={"attractiveness_score": True, "risk_score": True, "resilience_score": True, "classification": True},
+)
 
-    for _, row in group.iterrows():
-        ax.annotate(
-            row["country"],
-            (row["attractiveness_score"], row["risk_score"]),
-            xytext=(4, 4),
-            textcoords="offset points",
-            fontsize=8,
-        )
+fig.update_traces(marker=dict(size=14, line=dict(width=1, color='white')), textposition='top center')
+fig.update_layout(
+    xaxis_title="Attractiveness Score",
+    yaxis_title="Risk Score",
+    legend_title="Classification",
+    height=600,
+    font=dict(size=13),
+)
 
-ax.set_xlabel("Attractiveness Score")
-ax.set_ylabel("Risk Score")
-ax.legend()
-ax.grid(alpha=0.2)
-
-st.pyplot(fig)
+st.plotly_chart(fig, use_container_width=True)
