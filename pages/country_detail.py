@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 
 st.title("Country Detail View")
 
@@ -37,3 +38,16 @@ if not risk_latest.empty:
     st.write(f"Risk score this year: {round(risk_latest['risk_score'], 1)}")
     if 'is_unusual_change' in risk_full.columns:
         st.write(f"Unusual change flagged by anomaly detection: {risk_latest['is_unusual_change']}")
+
+st.subheader("Download Full Report")
+report_path = f"data/reports/{selected_country.replace(' ', '_')}_report.pdf"
+if os.path.exists(report_path):
+    with open(report_path, "rb") as f:
+        st.download_button(
+            label=f"Download {selected_country} Report (PDF)",
+            data=f,
+            file_name=f"{selected_country}_report.pdf",
+            mime="application/pdf"
+        )
+else:
+    st.write("Report not available for this country yet.")
